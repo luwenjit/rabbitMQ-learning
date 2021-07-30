@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * @author lisw
  * @create 2021/6/25 21:51
- * 发送延时消息
+ * 生产者-发送延时消息
  */
 @RestController
 @RequestMapping("/ttl")
@@ -24,6 +24,10 @@ public class MsgController {
     @Resource
     private RabbitTemplate rabbitTemplate;
 
+    /**
+     * 1、定义两个普通队列，接收生产者发来得消息，通过QA,QB设置过期时间
+     * 问题：可以按预先设置队列ttl时间收到消息，但是不能灵活运用
+     */
     /**开始发消息*/
     @GetMapping("/sendMsg/{msg}")
     public void sendMsg(@PathVariable("msg")String msg){
@@ -33,6 +37,10 @@ public class MsgController {
       rabbitTemplate.convertAndSend("X","XB", "消息来自ttl为40s的队列:" + msg);
     }
 
+    /**
+     * 2、定义一个普通队列，不再设置该队列的消息过期时间，而是让生产者指定TTL时间【优化1中的时间不能自定义问题】
+     * 问题：两次指定不同ttl的消息，发生了排队情况，实际收到消息的时间并不是参数ttl时间【rabbitMQ只会检测第一条消息是否过期】
+     */
     /**开始发定义有过期时间的消息*/
     @GetMapping("/sendMsg/{msg}/{ttlTime}")
     public void sendExpireMsg(@PathVariable("msg")String msg,@PathVariable("ttlTime")String ttlTime){
@@ -45,6 +53,10 @@ public class MsgController {
         });
     }
 
+    /**
+     * 3、基于插件的延迟消息发送，解决2中的问题
+     *
+     */
     /**基于插件的延时队列*/
     @GetMapping("/sendDelayedMsg/{msg}/{delayedTime}")
     public void sendDelayedMsg(@PathVariable("msg")String msg,@PathVariable("delayedTime")Integer delayedTime){

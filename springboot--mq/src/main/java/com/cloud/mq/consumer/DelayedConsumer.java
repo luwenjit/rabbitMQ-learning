@@ -13,6 +13,7 @@ import java.util.Date;
 /**
  * @author lisw
  * @create 2021/6/26 15:02
+ * 基于插件的延迟队列消费者，对应生产者：MsgController中的sendDelayedMsg生产者
  */
 @Component
 @Slf4j

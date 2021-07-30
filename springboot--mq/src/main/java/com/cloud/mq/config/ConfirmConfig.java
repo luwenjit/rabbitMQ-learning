@@ -11,6 +11,7 @@ import java.util.HashMap;
  * @author lisw
  * @create 2021/6/26 15:29
  * 发布确认兜底方案  添加缓存测试
+ * 发布确认高级：配置类
  */
 @Configuration
 public class ConfirmConfig {

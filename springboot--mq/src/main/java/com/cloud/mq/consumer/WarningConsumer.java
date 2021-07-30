@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author lisw
  * @create 2021/6/26 16:44
+ * 报警消费者 接收备份交换机来的消息
  */
 @Component
 @Slf4j

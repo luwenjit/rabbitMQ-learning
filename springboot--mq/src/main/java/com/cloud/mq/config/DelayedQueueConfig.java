@@ -23,12 +23,18 @@ public class DelayedQueueConfig {
     private static final String DELAYED_QUEUE_NAME = "delayed.queue";
     private static final String DELAYED_ROUTING_KEY = "delayed.routingkey";
 
+    /**
+     * 声明队列用new queue 或者 QueueBuilder
+     */
     /**声明队列*/
     @Bean
     public Queue delayedQueue(){
         return new Queue(DELAYED_QUEUE_NAME);
     }
 
+    /**
+     * 不是常规给定的交换机，需要给一个自定义交换机CustomExchange
+     */
     /**声明交换机 基于插件的*/
     @Bean
     public CustomExchange delayedExchange(){

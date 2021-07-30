@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 /**
+ * rabbitMQ配置类
  * @author lisw
  * @create 2021/6/25 21:22
  */
@@ -102,7 +103,7 @@ public class TtlQueueConfig {
     }
 
     @Bean
-    public Binding queueCBindingY(@Qualifier("queueC") Queue queueC,
+    public Binding queueCBindingX(@Qualifier("queueC") Queue queueC,
                                   @Qualifier("xExchange") Exchange xExchange){
         return BindingBuilder.bind(queueC).to(xExchange).with("XC").noargs();
     }

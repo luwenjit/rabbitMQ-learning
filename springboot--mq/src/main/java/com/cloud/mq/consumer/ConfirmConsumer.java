@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author lisw
  * @create 2021/6/26 15:43
+ * 接收消息，发布确认高级篇
  */
 @Component
 @Slf4j
